@@ -13,10 +13,27 @@ return new class extends Migration
     {
         Schema::create('ads', function (Blueprint $table) {
             $table->id();
+
+            // Relations
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->foreignId('subcategory_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('location_id')->constrained()->cascadeOnDelete();
+
+            // Ad data
+            $table->enum('condition', ['new', 'pre_owned', 'refurbished']);
             $table->string('title');
+            $table->text('description');
+            $table->decimal('price', 10, 2)->nullable();
+
+            $table->enum('status', ['active', 'suspended', 'expired'])
+                ->default('active');
+
+            $table->timestamp('expires_at')->nullable();
+
+            // Meta
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
