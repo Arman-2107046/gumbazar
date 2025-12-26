@@ -9,6 +9,9 @@ class Ad extends Model
 {
     use SoftDeletes;
 
+    /**
+     * Mass assignable attributes
+     */
     protected $fillable = [
         'user_id',
         'category_id',
@@ -18,10 +21,15 @@ class Ad extends Model
         'title',
         'description',
         'price',
+        'phone_number',        // ✅ added
+        'whatsapp_number',     // ✅ added
         'status',
         'expires_at',
     ];
 
+    /**
+     * Casts
+     */
     protected $casts = [
         'price' => 'decimal:2',
         'expires_at' => 'datetime',
@@ -52,20 +60,25 @@ class Ad extends Model
     {
         return $this->belongsTo(Location::class);
     }
+
     public function images()
     {
         return $this->hasMany(AdImage::class);
     }
 
-
     /*
     |--------------------------------------------------------------------------
-    | Scopes (Optional)
+    | Helpers (simple & optional)
     |--------------------------------------------------------------------------
     */
 
-    // public function scopeActive($query)
+    // public function isExpired(): bool
     // {
-    //     return $query->where('status', 'active');
+    //     return $this->expires_at !== null && $this->expires_at->isPast();
+    // }
+
+    // public function isActive(): bool
+    // {
+    //     return $this->status === 'active' && ! $this->isExpired();
     // }
 }

@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -21,6 +19,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_verified',
+        'is_suspended', // ✅ added
     ];
 
     /**
@@ -34,15 +34,28 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * The attributes that should be cast.
      */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
+            'is_verified' => 'boolean',
+            'is_suspended' => 'boolean', // ✅ added
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Optional helpers (safe)
+     */
+    public function getSellerTypeAttribute(): string
+    {
+        return $this->is_verified ? 'Verified Seller' : 'Member';
+    }
+
+    public function getIsActiveAttribute(): bool
+    {
+        return ! $this->is_suspended;
     }
 }

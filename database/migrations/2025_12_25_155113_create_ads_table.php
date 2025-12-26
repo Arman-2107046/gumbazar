@@ -26,6 +26,11 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('price', 10, 2)->nullable();
 
+            // 📞 Contact info (per ad)
+            $table->string('phone_number');                // mobile number
+            $table->string('whatsapp_number')->nullable(); // WhatsApp number
+
+            // Status
             $table->enum('status', ['active', 'suspended', 'expired'])
                 ->default('active');
 

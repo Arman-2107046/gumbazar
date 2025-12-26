@@ -14,26 +14,76 @@ class CategoryWithSubcategorySeeder extends Seeder
         $thumbnailUrl = 'https://images.pexels.com/photos/28839480/pexels-photo-28839480.jpeg';
 
         $data = [
+            'Mobiles' => [
+                'Smartphones',
+                'Feature Phones',
+                'Mobile Accessories',
+                'Chargers & Cables',
+                'Power Banks',
+                'Mobile Repairs',
+            ],
+
             'Electronics' => [
-                'Mobile Phones',
                 'Laptops',
                 'Tablets',
-                'Accessories',
+                'Televisions',
+                'Cameras',
+                'Headphones',
+                'Smart Devices',
             ],
+
             'Vehicles' => [
                 'Cars',
                 'Motorcycles',
                 'Bicycles',
+                'Electric Vehicles',
+                'Vehicle Parts',
+                'Vehicle Services',
             ],
-            'Real Estate' => [
-                'Apartments',
-                'Houses',
-                'Land',
+
+            'Home & Living' => [
+                'Furniture',
+                'Home Decor',
+                'Kitchen Appliances',
+                'Lighting',
+                'Beds & Mattresses',
+                'Cleaning Supplies',
             ],
-            'Services' => [
-                'Cleaning',
-                'Plumbing',
-                'Electrician',
+
+            "Men's Fashion" => [
+                'Shirts',
+                'T-Shirts',
+                'Pants',
+                'Shoes',
+                'Watches',
+                'Accessories',
+            ],
+
+            "Women's Fashion" => [
+                'Dresses',
+                'Tops',
+                'Handbags',
+                'Shoes',
+                'Jewelry',
+                'Beauty Products',
+            ],
+
+            'Hobbies & Sports' => [
+                'Fitness Equipment',
+                'Outdoor Sports',
+                'Indoor Games',
+                'Musical Instruments',
+                'Art Supplies',
+                'Collectibles',
+            ],
+
+            'Education' => [
+                'Books',
+                'Online Courses',
+                'Coaching Centers',
+                'Language Learning',
+                'Skill Development',
+                'Educational Tools',
             ],
         ];
 
@@ -43,7 +93,7 @@ class CategoryWithSubcategorySeeder extends Seeder
                 ['slug' => Str::slug($categoryName)],
                 [
                     'name' => $categoryName,
-                    'thumbnail' => $thumbnailUrl, // ✅ same image for all
+                    'thumbnail' => $thumbnailUrl,
                     'is_active' => true,
                 ]
             );
