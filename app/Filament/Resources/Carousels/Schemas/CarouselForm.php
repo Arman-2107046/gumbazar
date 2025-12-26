@@ -15,15 +15,30 @@ class CarouselForm
             ->components([
                 TextInput::make('name')
                     ->required(),
+
                 FileUpload::make('image_path')
+                    ->label('Carousel Image')
+                    ->disk('public')                // ✅ required
+                    ->directory('carousels')        // ✅ keep files organized
                     ->image()
+                    ->preserveFilenames()           // ✅ keep original name
+                    // 👉 OR use the safer version below (recommended for prod)
+                    // ->getUploadedFileNameForStorageUsing(
+                    //     fn ($file) => time() . '-' . $file->getClientOriginalName()
+                    // )
                     ->required(),
-                TextInput::make('link'),
+
+                TextInput::make('link')
+                    ->url()
+                    ->nullable(),
+
                 TextInput::make('sort_order')
-                    ->required()
                     ->numeric()
-                    ->default(0),
+                    ->default(0)
+                    ->required(),
+
                 Toggle::make('is_active')
+                    ->default(true)
                     ->required(),
             ]);
     }

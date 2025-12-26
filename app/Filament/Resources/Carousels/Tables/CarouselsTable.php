@@ -18,25 +18,32 @@ class CarouselsTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                ImageColumn::make('image_path'),
+
+                ImageColumn::make('image_path')
+                    ->disk('public')     // ✅ THIS FIXES IT
+                    ->label('Image')
+                    ->square()
+                    ->height(60),
+
                 TextColumn::make('link')
                     ->searchable(),
+
                 TextColumn::make('sort_order')
                     ->numeric()
                     ->sortable(),
+
                 IconColumn::make('is_active')
                     ->boolean(),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
             ])
             ->recordActions([
                 EditAction::make(),
