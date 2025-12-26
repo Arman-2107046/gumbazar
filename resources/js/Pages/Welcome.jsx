@@ -1,8 +1,9 @@
 import Footer from "@/Components/AppComponents/Footer";
 import Navbar from "@/Components/AppComponents/Navbar";
+import BrowseCategories from "@/Components/HomeComponents/BrowseCategories";
 import Carousel from "@/Components/HomeComponents/Carousel";
 
-const Welcome = ({carousels}) => {
+const Welcome = ({ carousels }) => {
     return (
         <div>
             <Navbar />
@@ -11,6 +12,11 @@ const Welcome = ({carousels}) => {
                 <Carousel items={carousels} />
             </section>
 
+            {/* <section>
+                <BrowseCategories />
+            </section> */}
+
+            
             <section className="h-[100vh]"></section>
             <Footer />
         </div>

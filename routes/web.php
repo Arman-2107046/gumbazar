@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdController;
 use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -19,23 +21,13 @@ Route::get('/', [CarouselController::class, 'index']);
 
 
 
+Route::get('/all-ads', [AdController::class, 'index'])
+    ->name('ads.index');
 
+Route::get('/ads/{ad}', [AdController::class, 'show'])
+    ->name('ads.show');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 

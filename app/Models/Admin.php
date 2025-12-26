@@ -14,6 +14,11 @@ class Admin extends Authenticatable
 
     protected $hidden = [
         'password',
-        'remember_token', // ✅ hide this too
+        'remember_token', 
     ];
+
+    public function canAccessFilament(): bool
+    {
+        return true;
+    }
 }
