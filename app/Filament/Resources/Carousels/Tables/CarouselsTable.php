@@ -1,26 +1,29 @@
 <?php
 
-namespace App\Filament\Resources\Subcategories\Tables;
+namespace App\Filament\Resources\Carousels\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SubcategoriesTable
+class CarouselsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('category.name') // ✅ SHOW CATEGORY NAME
-                    ->label('Category')
-                    ->sortable()
-                    ->searchable(),
                 TextColumn::make('name')
                     ->searchable(),
+                ImageColumn::make('image_path'),
+                TextColumn::make('link')
+                    ->searchable(),
+                TextColumn::make('sort_order')
+                    ->numeric()
+                    ->sortable(),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
