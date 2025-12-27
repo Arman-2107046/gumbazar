@@ -1,14 +1,16 @@
 import Navbar from "@/Components/AppComponents/Navbar";
 import Footer from "@/Components/AppComponents/Footer";
 import AdCard from "@/Components/Ads/AdCard";
-import Pagination from "@/Components/Shared/Pagination";
-import { Link, usePage, router } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function AllAds({ ads }) {
-    const { locations, categories, filters } = usePage().props;
+export default function Show({ category, ads }) {
+    const { locations, filters } = usePage().props;
+
+    const [showFilters, setShowFilters] = useState(false);
 
     const [form, setForm] = useState({
+        subcategories: filters.subcategories || [],
         location: filters.location || "",
         min_price: filters.min_price || "",
         max_price: filters.max_price || "",
@@ -16,13 +18,15 @@ export default function AllAds({ ads }) {
         member: filters.member || "",
     });
 
-    const [showFilters, setShowFilters] = useState(false);
-
     const applyFilters = () => {
-        router.get(route("ads.index"), form, {
-            preserveScroll: true,
-            preserveState: true,
-        });
+        router.get(
+            route("category.show", category.slug),
+            form,
+            {
+                preserveScroll: true,
+                preserveState: true,
+            }
+        );
     };
 
     return (
@@ -30,8 +34,10 @@ export default function AllAds({ ads }) {
             <Navbar />
 
             <div className="px-4 py-10 mx-auto max-w-7xl">
-                <h1 className="mb-6 text-2xl font-bold">
-                    All Ads
+
+                {/* CATEGORY TITLE */}
+                <h1 className="mb-6 text-3xl font-bold">
+                    {category.name}
                 </h1>
 
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
@@ -39,45 +45,63 @@ export default function AllAds({ ads }) {
                     {/* ================= SIDEBAR ================= */}
                     <aside className="lg:col-span-1">
 
-                        {/* Mobile toggle */}
+                        {/* Mobile Toggle */}
                         <button
                             onClick={() => setShowFilters(!showFilters)}
-                            className="w-full px-4 py-2 mb-4 text-sm font-medium bg-white border rounded-lg lg:hidden"
+                            className="w-full px-4 py-2 mb-4 bg-white border rounded-lg lg:hidden"
                         >
                             {showFilters ? "Hide Filters ▲" : "Show Filters ▼"}
                         </button>
 
                         <div
-                            className={`p-5 space-y-6 bg-white border rounded-xl
+                            className={`bg-white border rounded-xl p-5 space-y-6
                             ${showFilters ? "block" : "hidden"} lg:block`}
                         >
                             <h3 className="text-lg font-semibold">
-                                Browse
+                                Filters
                             </h3>
 
-                            {/* ===== CATEGORIES ===== */}
+                            {/* SUBCATEGORIES (MULTI SELECT) */}
                             <div>
-                                <h4 className="mb-2 text-sm font-semibold">
-                                    Categories
+                                <h4 className="mb-2 text-sm font-medium">
+                                    Subcategories
                                 </h4>
 
-                                <ul className="space-y-2">
-                                    {categories.map((cat) => (
-                                        <li key={cat.id}>
-                                            <Link
-                                                href={route("category.show", cat.slug)}
-                                                className="block text-sm text-gray-700 hover:text-blue-600"
-                                            >
-                                                {cat.name}
-                                            </Link>
-                                        </li>
+                                <div className="space-y-2 overflow-y-auto max-h-60">
+                                    {category.subcategories.map((sub) => (
+                                        <label
+                                            key={sub.id}
+                                            className="flex items-center gap-2 text-sm"
+                                        >
+                                            <input
+                                                type="checkbox"
+                                                checked={form.subcategories.includes(sub.id)}
+                                                onChange={(e) => {
+                                                    if (e.target.checked) {
+                                                        setForm({
+                                                            ...form,
+                                                            subcategories: [
+                                                                ...form.subcategories,
+                                                                sub.id,
+                                                            ],
+                                                        });
+                                                    } else {
+                                                        setForm({
+                                                            ...form,
+                                                            subcategories: form.subcategories.filter(
+                                                                (id) => id !== sub.id
+                                                            ),
+                                                        });
+                                                    }
+                                                }}
+                                            />
+                                            {sub.name}
+                                        </label>
                                     ))}
-                                </ul>
+                                </div>
                             </div>
 
-                            <hr />
-
-                            {/* ===== LOCATION ===== */}
+                            {/* LOCATION */}
                             <div>
                                 <label className="text-sm font-medium">
                                     Location
@@ -101,7 +125,7 @@ export default function AllAds({ ads }) {
                                 </select>
                             </div>
 
-                            {/* ===== PRICE ===== */}
+                            {/* PRICE RANGE */}
                             <div>
                                 <label className="text-sm font-medium">
                                     Price Range
@@ -134,7 +158,7 @@ export default function AllAds({ ads }) {
                                 </div>
                             </div>
 
-                            {/* ===== SELLER TYPE ===== */}
+                            {/* SELLER TYPE */}
                             <div className="space-y-2">
                                 <label className="flex items-center gap-2 text-sm">
                                     <input
@@ -169,7 +193,7 @@ export default function AllAds({ ads }) {
 
                             <button
                                 onClick={applyFilters}
-                                className="w-full py-2 text-white bg-blue-600 rounded hover:bg-blue-700"
+                                className="w-full py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
                             >
                                 Apply Filters
                             </button>
@@ -181,18 +205,36 @@ export default function AllAds({ ads }) {
 
                         {ads.data.length === 0 ? (
                             <p className="text-gray-500">
-                                No ads found.
+                                No ads found in this category.
                             </p>
                         ) : (
                             <>
-                                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3">
                                     {ads.data.map((ad) => (
                                         <AdCard key={ad.id} ad={ad} />
                                     ))}
                                 </div>
 
-                                <div className="mt-10">
-                                    <Pagination links={ads.links} />
+                                {/* PAGINATION */}
+                                <div className="flex justify-center gap-2 mt-10">
+                                    {ads.links.map((link, index) => (
+                                        <Link
+                                            key={index}
+                                            href={link.url ?? "#"}
+                                            preserveScroll
+                                            className={`px-4 py-2 rounded-lg text-sm ${
+                                                link.active
+                                                    ? "bg-indigo-600 text-white"
+                                                    : "bg-white border hover:bg-gray-100"
+                                            } ${
+                                                !link.url &&
+                                                "opacity-50 cursor-not-allowed"
+                                            }`}
+                                            dangerouslySetInnerHTML={{
+                                                __html: link.label,
+                                            }}
+                                        />
+                                    ))}
                                 </div>
                             </>
                         )}

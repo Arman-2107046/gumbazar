@@ -30,10 +30,8 @@ Route::get('/ads/{ad}', [AdController::class, 'show'])
 // Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-
-
-
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/category/{slug}', [HomeController::class, 'category'])->name('category.show');
 
 
 
