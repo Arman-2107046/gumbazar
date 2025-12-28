@@ -66,19 +66,5 @@ class Ad extends Model
         return $this->hasMany(AdImage::class);
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | Helpers (simple & optional)
-    |--------------------------------------------------------------------------
-    */
 
-    // public function isExpired(): bool
-    // {
-    //     return $this->expires_at !== null && $this->expires_at->isPast();
-    // }
-
-    // public function isActive(): bool
-    // {
-    //     return $this->status === 'active' && ! $this->isExpired();
-    // }
 }

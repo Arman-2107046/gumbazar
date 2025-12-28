@@ -9,8 +9,11 @@ export default function Show({ category, ads }) {
 
     const [showFilters, setShowFilters] = useState(false);
 
+    // 🔥 IMPORTANT: cast subcategory IDs to numbers
     const [form, setForm] = useState({
-        subcategories: filters.subcategories || [],
+        subcategories: filters.subcategories
+            ? filters.subcategories.map(Number)
+            : [],
         location: filters.location || "",
         min_price: filters.min_price || "",
         max_price: filters.max_price || "",
@@ -19,14 +22,11 @@ export default function Show({ category, ads }) {
     });
 
     const applyFilters = () => {
-        router.get(
-            route("category.show", category.slug),
-            form,
-            {
-                preserveScroll: true,
-                preserveState: true,
-            }
-        );
+        router.get(route("category.show", category.slug), form, {
+            preserveScroll: true,
+            preserveState: true,
+            replace: true,
+        });
     };
 
     return (
@@ -34,17 +34,14 @@ export default function Show({ category, ads }) {
             <Navbar />
 
             <div className="px-4 py-10 mx-auto max-w-7xl">
-
                 {/* CATEGORY TITLE */}
                 <h1 className="mb-6 text-3xl font-bold">
                     {category.name}
                 </h1>
 
                 <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
-
                     {/* ================= SIDEBAR ================= */}
                     <aside className="lg:col-span-1">
-
                         {/* Mobile Toggle */}
                         <button
                             onClick={() => setShowFilters(!showFilters)}
@@ -61,43 +58,39 @@ export default function Show({ category, ads }) {
                                 Filters
                             </h3>
 
-                            {/* SUBCATEGORIES (MULTI SELECT) */}
+                            {/* SUBCATEGORIES */}
                             <div>
                                 <h4 className="mb-2 text-sm font-medium">
                                     Subcategories
                                 </h4>
 
                                 <div className="space-y-2 overflow-y-auto max-h-60">
-                                    {category.subcategories.map((sub) => (
-                                        <label
-                                            key={sub.id}
-                                            className="flex items-center gap-2 text-sm"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                checked={form.subcategories.includes(sub.id)}
-                                                onChange={(e) => {
-                                                    if (e.target.checked) {
+                                    {category.subcategories.map((sub) => {
+                                        const id = Number(sub.id);
+
+                                        return (
+                                            <label
+                                                key={id}
+                                                className="flex items-center gap-2 text-sm"
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    checked={form.subcategories.includes(id)}
+                                                    onChange={(e) => {
                                                         setForm({
                                                             ...form,
-                                                            subcategories: [
-                                                                ...form.subcategories,
-                                                                sub.id,
-                                                            ],
+                                                            subcategories: e.target.checked
+                                                                ? [...form.subcategories, id]
+                                                                : form.subcategories.filter(
+                                                                      (sid) => sid !== id
+                                                                  ),
                                                         });
-                                                    } else {
-                                                        setForm({
-                                                            ...form,
-                                                            subcategories: form.subcategories.filter(
-                                                                (id) => id !== sub.id
-                                                            ),
-                                                        });
-                                                    }
-                                                }}
-                                            />
-                                            {sub.name}
-                                        </label>
-                                    ))}
+                                                    }}
+                                                />
+                                                {sub.name}
+                                            </label>
+                                        );
+                                    })}
                                 </div>
                             </div>
 
@@ -202,7 +195,6 @@ export default function Show({ category, ads }) {
 
                     {/* ================= ADS GRID ================= */}
                     <div className="lg:col-span-3">
-
                         {ads.data.length === 0 ? (
                             <p className="text-gray-500">
                                 No ads found in this category.
@@ -222,6 +214,7 @@ export default function Show({ category, ads }) {
                                             key={index}
                                             href={link.url ?? "#"}
                                             preserveScroll
+                                            preserveState
                                             className={`px-4 py-2 rounded-lg text-sm ${
                                                 link.active
                                                     ? "bg-indigo-600 text-white"
