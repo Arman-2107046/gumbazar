@@ -57,6 +57,10 @@ Route::get('/faq', function () {
     return Inertia::render('Faq');
 });
 
+Route::get('/safety', function () {
+    return Inertia::render('Safety');
+});
+
 
 
 
