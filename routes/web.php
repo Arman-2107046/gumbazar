@@ -17,6 +17,8 @@ Route::get('/', function () {
     ]);
 });
 
+
+
 Route::get('/', [CarouselController::class, 'index']);
 
 
@@ -35,7 +37,9 @@ Route::get('/category/{slug}', [HomeController::class, 'category'])->name('categ
 
 
 
-
+Route::get('/about', function () {
+    return Inertia::render('About');
+});
 
 
 
