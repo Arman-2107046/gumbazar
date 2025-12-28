@@ -49,6 +49,10 @@ Route::get('/career', function () {
     return Inertia::render('Career');
 });
 
+Route::get('/advertising', function () {
+    return Inertia::render('Advertising');
+});
+
 
 
 
