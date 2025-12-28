@@ -53,6 +53,10 @@ Route::get('/advertising', function () {
     return Inertia::render('Advertising');
 });
 
+Route::get('/faq', function () {
+    return Inertia::render('Faq');
+});
+
 
 
 
