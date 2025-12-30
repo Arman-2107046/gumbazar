@@ -65,6 +65,10 @@ Route::get('/policy', function () {
     return Inertia::render('Policy');
 });
 
+Route::get('/contact', function () {
+    return Inertia::render('Contact');
+});
+
 
 
 

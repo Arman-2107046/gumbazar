@@ -36,7 +36,7 @@ export default function Footer() {
                         <li><Link href="'safety" className="hover:text-white">Safety Tips</Link></li>
                         <li><Link href="/policy" className="hover:text-white">Policies</Link></li>
                         {/* <li><Link href="#" className="hover:text-white">Privacy Notice</Link></li> */}
-                        <li><Link href="#" className="hover:text-white">Contact Us</Link></li>
+                        <li><Link href="/contact" className="hover:text-white">Contact Us</Link></li>
                     </ul>
                 </div>
 
@@ -44,9 +44,9 @@ export default function Footer() {
                 <div>
                     <h3 className="mb-4 font-semibold text-white">More From Us</h3>
                     <ul className="space-y-2 text-sm">
-                        <li><Link href="#" className="hover:text-white">Lifestyle</Link></li>
+                        {/* <li><Link href="#" className="hover:text-white">Lifestyle</Link></li> */}
                         <li><Link href="#" className="hover:text-white">Buying Guides</Link></li>
-                        <li><Link href="#" className="hover:text-white">Reviews</Link></li>
+                        {/* <li><Link href="#" className="hover:text-white">Reviews</Link></li> */}
                         <li><Link href="#" className="hover:text-white">Sell Faster</Link></li>
                         <li><Link href="#" className="hover:text-white">Community</Link></li>
                     </ul>
