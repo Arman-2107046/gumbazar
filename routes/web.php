@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -83,7 +84,8 @@ Route::get('/community', function () {
 });
 
 
-
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('/blogs/{slug}', [BlogController::class, 'show'])->name('blogs.show');
 
 
 

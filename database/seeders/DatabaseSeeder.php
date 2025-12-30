@@ -26,5 +26,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CategoryWithSubcategorySeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(AdSeeder::class);
+        $this->call(BlogSeeder::class);
     }
 }
