@@ -68,6 +68,9 @@ Route::get('/policy', function () {
 Route::get('/contact', function () {
     return Inertia::render('Contact');
 });
+Route::get('/buying-guides', function () {
+    return Inertia::render('BuyingGuides');
+});
 
 
 
