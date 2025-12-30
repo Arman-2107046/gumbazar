@@ -9,7 +9,7 @@ const Advertising = () => {
 
       <div className="min-h-screen bg-slate-50 text-slate-800">
         {/* Header Accent */}
-        <div className="absolute inset-x-0 top-0 pointer-events-none h-72 bg-gradient-to-b from-blue-50 to-transparent" />
+        {/* <div className="absolute inset-x-0 top-0 pointer-events-none h-72 bg-gradient-to-b from-blue-50 to-transparent" /> */}
 
         <div className="relative px-6 py-20 mx-auto max-w-7xl">
           {/* Hero */}

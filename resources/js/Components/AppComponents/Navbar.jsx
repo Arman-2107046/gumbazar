@@ -16,7 +16,7 @@ export default function Navbar() {
                     {/* LEFT */}
                     <div className="flex items-center gap-4">
                         <Link href="/" className="flex items-center">
-                            <img src="/logo.png" className="h-8" alt="Gumbazar" />
+                            <img src="/logo.png" className="h-10" alt="Gumbazar" />
                         </Link>
 
                         {/* Desktop links */}
@@ -78,10 +78,10 @@ export default function Navbar() {
                             </>
                         ) : (
                             <>
-                                <Link href="/login" className="text-sm text-gray-700 hover:underline">
+                                <Link href="/login" className="text-gray-700 hover:underline">
                                     Login
                                 </Link>
-                                <Link href="/register" className="text-sm text-gray-700 hover:underline">
+                                <Link href="/register" className="text-gray-700  hover:underline">
                                     Register
                                 </Link>
                                 <Link

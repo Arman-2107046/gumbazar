@@ -20,11 +20,11 @@ export default function Footer() {
                 <div>
                     <h3 className="mb-4 font-semibold text-white">About Us</h3>
                     <ul className="space-y-2 text-sm">
-                        <li><Link href="#" className="hover:text-white">About Gumbazar</Link></li>
-                        <li><Link href="#" className="hover:text-white">Gumbazar for Business</Link></li>
-                        <li><Link href="#" className="hover:text-white">Careers</Link></li>
+                        <li><Link href="/about" className="hover:text-white">About Gumbazar</Link></li>
+                        <li><Link href="/business" className="hover:text-white">Gumbazar for Business</Link></li>
+                        <li><Link href="/career" className="hover:text-white">Careers</Link></li>
                         <li><Link href="#" className="hover:text-white">Media & Press</Link></li>
-                        <li><Link href="#" className="hover:text-white">Advertising</Link></li>
+                        <li><Link href="advertising" className="hover:text-white">Advertising</Link></li>
                     </ul>
                 </div>
 
@@ -32,10 +32,10 @@ export default function Footer() {
                 <div>
                     <h3 className="mb-4 font-semibold text-white">Help & Contact</h3>
                     <ul className="space-y-2 text-sm">
-                        <li><Link href="#" className="hover:text-white">Help Center</Link></li>
-                        <li><Link href="#" className="hover:text-white">Safety Tips</Link></li>
-                        <li><Link href="#" className="hover:text-white">Policies</Link></li>
-                        <li><Link href="#" className="hover:text-white">Privacy Notice</Link></li>
+                        <li><Link href="faq" className="hover:text-white">FAQ</Link></li>
+                        <li><Link href="'safety" className="hover:text-white">Safety Tips</Link></li>
+                        <li><Link href="/policy" className="hover:text-white">Policies</Link></li>
+                        {/* <li><Link href="#" className="hover:text-white">Privacy Notice</Link></li> */}
                         <li><Link href="#" className="hover:text-white">Contact Us</Link></li>
                     </ul>
                 </div>

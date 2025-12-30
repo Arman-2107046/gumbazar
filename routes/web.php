@@ -61,6 +61,10 @@ Route::get('/safety', function () {
     return Inertia::render('Safety');
 });
 
+Route::get('/policy', function () {
+    return Inertia::render('Policy');
+});
+
 
 
 
@@ -88,3 +92,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+// netstat -ano | findstr :3306
+// taskkill /PID 6264 /F
