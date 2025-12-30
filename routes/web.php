@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 
 
+
 Route::get('/', [CarouselController::class, 'index']);
 
 
