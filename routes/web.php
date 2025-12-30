@@ -77,6 +77,10 @@ Route::get('/sell-faster', function () {
     return Inertia::render('SellFaster');
 });
 
+Route::get('/community', function () {
+    return Inertia::render('Community');
+});
+
 
 
 

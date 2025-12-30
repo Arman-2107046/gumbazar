@@ -48,7 +48,7 @@ export default function Footer() {
                         <li><Link href="/buying-guides" className="hover:text-white">Buying Guides</Link></li>
                         {/* <li><Link href="#" className="hover:text-white">Reviews</Link></li> */}
                         <li><Link href="/sell-faster" className="hover:text-white">Sell Faster</Link></li>
-                        <li><Link href="#" className="hover:text-white">Community</Link></li>
+                        <li><Link href="/community" className="hover:text-white">Community</Link></li>
                     </ul>
                 </div>
 
